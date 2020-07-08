@@ -1,0 +1,4 @@
+.card-selected:active {
+    background: gray;
+    color: white;
+}
