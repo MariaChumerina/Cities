@@ -54,13 +54,14 @@ export default class Form extends React.Component {
 
   getPossibleCities() {
     const { cities, value } = this.state;
+
     return cities.filter((city) => {
       const regExp = new RegExp(`^${value}`, 'i');
       return regExp.test(city);
     })
     .map((city, i) => (
       <div className='card card-selected' key={`${city}_${i}`} onClick={this.handleClick}>
-         <List city={city}/>
+         <List city={city} />
       </div>
         )
     )
@@ -73,12 +74,20 @@ export default class Form extends React.Component {
     return (
         <>
           <form className='mt-5' onSubmit={this.handleSubmit}>
-            <div className="form-group">
-              <p>Выберите город:</p>
-              <input list="json-datalist" value={value} onChange={this.handleChange}/>
+            <div className="form-group w-50">
+              <label htmlFor='chooseCity'>
+                Выберите город:
+              </label>
+              <input
+                  className="form-control"
+                  list="json-datalist"
+                  id='chooseCity'
+                  value={value}
+                  onChange={this.handleChange}
+                  placeholder="Введите название города" />
               {value.length > 2 && this.getPossibleCities()}
             </div>
-            <button type='submit' className="btn btn-secondary">Подтвердить</button>
+            <button type='submit' className="btn btn-secondary mt-1">Подтвердить</button>
           </form>
           {showingCities.length ? <ShowingCities onRemove={(key) => this.handleRemove(key)} cities={showingCities}/> : []}
         </>
