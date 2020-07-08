@@ -1,8 +1,9 @@
 import * as React from 'react';
 import russianCities from '../russian-cities.json';
 import { List } from '../List/List.jsx';
-import { ChosenCities } from '../ChosenCities/ChosenCities.jsx';
+import ShowingCities from '../ShowingCities/ShowingCities.jsx';
 import './Form.css';
+import { uniq } from 'lodash';
 
 export default class Form extends React.Component {
   constructor(props) {
@@ -11,13 +12,16 @@ export default class Form extends React.Component {
       value: '',
       cities: [],
       chosenCities: [],
+      showingCities: [],
     };
   }
 
   componentDidMount() {
     const cities = russianCities.map(({ name }) => name);
     const value = localStorage.getItem('value') ? localStorage.getItem('value') : '';
-    this.setState({ cities, value });
+    const showingCities = localStorage.getItem('showingCities')
+        ? localStorage.getItem('showingCities').split(',') : [];
+    this.setState({ cities, value, showingCities });
   }
 
   handleChange = (e) => {
@@ -29,16 +33,23 @@ export default class Form extends React.Component {
   handleClick = (e) => {
     const { textContent } = e.target;
     const { chosenCities } = this.state;
-    this.setState({ chosenCities: [textContent, ...chosenCities]});
-    console.log('click', chosenCities, e.target.textContent);
+    this.setState({ chosenCities: uniq([textContent, ...chosenCities])});
   }
 
-  handleSubmit = () => {
-    const { chosenCities } = this.state;
-    return chosenCities.map((city, i) => (
-        <ChosenCities city={city} key={`${city}_${i}`}/>
-        )
-    )
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const { chosenCities, showingCities } = this.state;
+    const result = uniq([...chosenCities, ...showingCities]);
+    this.setState({ showingCities: result, chosenCities: [], value: '', });
+    localStorage.setItem('value', '');
+    localStorage.setItem('showingCities', result.join(','));
+  }
+
+  handleRemove = (key) => () => {
+    const { showingCities } = this.state;
+    const updated = showingCities.filter((city) => city !== key);
+    this.setState({ showingCities: updated });
+    localStorage.setItem('showingCities', updated.join(','));
   }
 
   getPossibleCities() {
@@ -57,16 +68,20 @@ export default class Form extends React.Component {
 
 
   render() {
-    const { value } = this.state;
+    const { value, showingCities } = this.state;
 
     return (
-        <form className='mt-5' onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <input list="json-datalist" value={value} onChange={this.handleChange}/>
-            {value.length > 2 && this.getPossibleCities()}
-          </div>
-          <button type='submit' className="btn btn-secondary">Подтвердить</button>
-        </form>
+        <>
+          <form className='mt-5' onSubmit={this.handleSubmit}>
+            <div className="form-group">
+              <p>Выберите город:</p>
+              <input list="json-datalist" value={value} onChange={this.handleChange}/>
+              {value.length > 2 && this.getPossibleCities()}
+            </div>
+            <button type='submit' className="btn btn-secondary">Подтвердить</button>
+          </form>
+          {showingCities.length ? <ShowingCities onRemove={(key) => this.handleRemove(key)} cities={showingCities}/> : []}
+        </>
     );
   }
 }
