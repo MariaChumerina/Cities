@@ -7,7 +7,7 @@ export default function ShowingCities({ cities, onRemove }) {
             <h5 className='mt-5'>Выбранные города:</h5>
             <ul className='list-group mt-3 mb-5 list-width'>
               {cities.map((city) => (
-                <li className='list-group-item d-flex justify-content-between' key={city}>
+                <li className='list-group-item d-flex justify-content-between align-items-baseline' key={city}>
                   {city}
                   <button type='button' className='btn btn-link mobile-hide' onClick={onRemove(city)}>
                     Удалить
