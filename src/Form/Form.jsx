@@ -18,8 +18,10 @@ export default class Form extends React.Component {
 
   componentDidMount() {
     const cities = russianCities.map(({ name }) => name);
-    const value =  localStorage.getItem('value') || '';
-    const showingCities = localStorage.getItem('showingCities').split(',') || [];
+    const value =  localStorage.getItem('value')
+         ? localStorage.getItem('value') : '';
+    const showingCities = localStorage.getItem('showingCities')
+        ? localStorage.getItem('showingCities').split(',') : [];
     this.setState({ cities, value, showingCities });
   }
 
@@ -67,7 +69,7 @@ export default class Form extends React.Component {
             key={`${city}_${i}`}
       />
       )
-    )
+    );
   }
 
 
@@ -95,7 +97,9 @@ export default class Form extends React.Component {
                 </div>
               </div>}
             </div>
-            <button type='submit' className="btn btn-secondary mt-1">Подтвердить</button>
+            <button type='submit' className="btn btn-secondary mt-1">
+              Подтвердить
+            </button>
           </form>
           {showingCities.length
               ? <ShowingCities onRemove={(key) => this.handleRemove(key)} cities={showingCities}/> : []}
