@@ -18,9 +18,8 @@ export default class Form extends React.Component {
 
   componentDidMount() {
     const cities = russianCities.map(({ name }) => name);
-    const value = localStorage.getItem('value') ? localStorage.getItem('value') : '';
-    const showingCities = localStorage.getItem('showingCities')
-        ? localStorage.getItem('showingCities').split(',') : [];
+    const value =  localStorage.getItem('value') || '';
+    const showingCities = localStorage.getItem('showingCities').split(',') || [];
     this.setState({ cities, value, showingCities });
   }
 
@@ -62,9 +61,11 @@ export default class Form extends React.Component {
     })
     .map((city, i) => (
       <List city={city}
-            classes={cn({ 'list-group-item': true, card: true, 'card-selected': chosenCities.includes(city), 'card-hover': true })}
+            classes={cn({ 'list-group-item': true,
+                          'card-selected': chosenCities.includes(city),
+                          'card-hover': true })}
             key={`${city}_${i}`}
-            />
+      />
       )
     )
   }
@@ -96,7 +97,8 @@ export default class Form extends React.Component {
             </div>
             <button type='submit' className="btn btn-secondary mt-1">Подтвердить</button>
           </form>
-          {showingCities.length ? <ShowingCities onRemove={(key) => this.handleRemove(key)} cities={showingCities}/> : []}
+          {showingCities.length
+              ? <ShowingCities onRemove={(key) => this.handleRemove(key)} cities={showingCities}/> : []}
         </>
     );
   }
