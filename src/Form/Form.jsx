@@ -3,7 +3,6 @@ import russianCities from '../russian-cities.json';
 import { List } from '../List/List.jsx';
 import ShowingCities from '../ShowingCities/ShowingCities.jsx';
 import './Form.css';
-import { uniq } from 'lodash';
 import cn from 'classnames';
 
 export default class Form extends React.Component {
@@ -32,17 +31,17 @@ export default class Form extends React.Component {
   }
 
   handleClick = (e) => {
-    console.log('click');
-
     const { textContent } = e.target;
-    const { chosenCities } = this.state;
-    this.setState({ chosenCities: uniq([textContent, ...chosenCities])});
+    const { chosenCities, showingCities } = this.state;
+    if (!chosenCities.includes(textContent) && !showingCities.includes(textContent)) {
+      this.setState({ chosenCities: [textContent, ...chosenCities]});
+    } else alert('Этот город уже выбран!');
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
     const { chosenCities, showingCities } = this.state;
-    const result = uniq([...chosenCities, ...showingCities]);
+    const result = [...chosenCities, ...showingCities];
     this.setState({ showingCities: result, chosenCities: [], value: '', });
     localStorage.setItem('value', '');
     localStorage.setItem('showingCities', result.join(','));
