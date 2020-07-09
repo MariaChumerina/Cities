@@ -11,7 +11,7 @@ export default class Form extends React.Component {
     this.state = {
       value: '',
       cities: [],
-      chosenCities: [],
+      selectedCities: [],
       showingCities: [],
     };
   }
@@ -33,17 +33,17 @@ export default class Form extends React.Component {
 
   handleClick = (e) => {
     const { textContent } = e.target;
-    const { chosenCities, showingCities } = this.state;
-    if (!chosenCities.includes(textContent) && !showingCities.includes(textContent)) {
-      this.setState({ chosenCities: [textContent, ...chosenCities]});
+    const { selectedCities, showingCities } = this.state;
+    if (!showingCities.includes(textContent)) {
+      this.setState({ selectedCities: [textContent, ...selectedCities]});
     } else alert('Этот город уже выбран!');
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { chosenCities, showingCities } = this.state;
-    const result = [...chosenCities, ...showingCities];
-    this.setState({ showingCities: result, chosenCities: [], value: '', });
+    const { selectedCities, showingCities } = this.state;
+    const result = [...selectedCities, ...showingCities];
+    this.setState({ showingCities: result, selectedCities: [], value: '', });
     localStorage.setItem('value', '');
     localStorage.setItem('showingCities', result.join(','));
   }
@@ -56,7 +56,7 @@ export default class Form extends React.Component {
   }
 
   getPossibleCities() {
-    const { cities, value, chosenCities } = this.state;
+    const { cities, value, selectedCities } = this.state;
     return cities.filter((city) => {
       const regExp = new RegExp(`^${value}`, 'i');
       return regExp.test(city);
@@ -64,7 +64,7 @@ export default class Form extends React.Component {
     .map((city, i) => (
       <List city={city}
             classes={cn({ 'list-group-item': true,
-                          'card-selected': chosenCities.includes(city),
+                          'card-selected': selectedCities.includes(city),
                           'card-hover': true })}
             key={`${city}_${i}`}
       />
