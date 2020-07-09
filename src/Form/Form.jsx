@@ -77,9 +77,9 @@ export default class Form extends React.Component {
     const { value, showingCities } = this.state;
 
     return (
-        <>
-          <form className='mt-5' onSubmit={this.handleSubmit}>
-            <div className="form-group form-width">
+        <div className='d-flex mobile-direction mt-5'>
+          <form className='form-width mr-md-5' onSubmit={this.handleSubmit}>
+            <div className="form-group">
               <label htmlFor='chooseCity'>
                 Выберите город:
               </label>
@@ -103,7 +103,7 @@ export default class Form extends React.Component {
           </form>
           {showingCities.length
               ? <ShowingCities onRemove={(key) => this.handleRemove(key)} cities={showingCities}/> : []}
-        </>
+        </div>
     );
   }
 }

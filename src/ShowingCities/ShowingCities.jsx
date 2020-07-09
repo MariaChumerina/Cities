@@ -3,9 +3,11 @@ import './Showing-cities.css'
 
 export default function ShowingCities({ cities, onRemove }) {
     return (
-        <>
-            <h5 className='mt-5'>Выбранные города:</h5>
-            <ul className='list-group mt-3 mb-5 list-width'>
+        <div className='list-width list-position'>
+            <p className='mt-5 mt-md-0 mb-0'>
+              Выбранные города:
+            </p>
+            <ul className='list-group mt-2 mb-5'>
               {cities.map((city) => (
                 <li className='list-group-item d-flex justify-content-between align-items-baseline' key={city}>
                   {city}
@@ -19,6 +21,6 @@ export default function ShowingCities({ cities, onRemove }) {
                   )
               )}
             </ul>
-        </>
+        </div>
     );
 }

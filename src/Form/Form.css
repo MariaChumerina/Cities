@@ -12,10 +12,13 @@
     overflow-y: scroll;
 }
 .form-width {
-    width: 50%;
+    width: 30%;
 }
 @media screen and (max-width: 767px){
     .form-width {
         width: 90%;
+    }
+    .mobile-direction {
+        flex-direction: column;
     }
 }
