@@ -34,9 +34,9 @@ export default class Form extends React.Component {
   handleClick = (e) => {
     const { textContent } = e.target;
     const { selectedCities, showingCities } = this.state;
-    if (!showingCities.includes(textContent)) {
+    if (!showingCities.includes(textContent) && ! selectedCities.includes(textContent)) {
       this.setState({ selectedCities: [textContent, ...selectedCities]});
-    } else alert('Этот город уже выбран!');
+    }
   }
 
   handleSubmit = (e) => {
