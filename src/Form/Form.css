@@ -1,4 +1,4 @@
-.card-selected:active {
+.card-selected {
     background: gray;
     color: white;
 }

@@ -4,6 +4,7 @@ import { List } from '../List/List.jsx';
 import ShowingCities from '../ShowingCities/ShowingCities.jsx';
 import './Form.css';
 import { uniq } from 'lodash';
+import cn from 'classnames';
 
 export default class Form extends React.Component {
   constructor(props) {
@@ -53,14 +54,13 @@ export default class Form extends React.Component {
   }
 
   getPossibleCities() {
-    const { cities, value } = this.state;
-
+    const { cities, value, chosenCities } = this.state;
     return cities.filter((city) => {
       const regExp = new RegExp(`^${value}`, 'i');
       return regExp.test(city);
     })
     .map((city, i) => (
-      <div className='card card-selected' key={`${city}_${i}`} onClick={this.handleClick}>
+      <div className={cn({ card: true, 'card-selected': chosenCities.includes(city) })} key={`${city}_${i}`} onClick={this.handleClick}>
          <List city={city} />
       </div>
         )
