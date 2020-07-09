@@ -2,3 +2,20 @@
     background: gray;
     color: white;
 }
+.card-hover:hover  {
+    background: gray;
+    color: white;
+    cursor: pointer;
+}
+.overflow-scroll {
+    max-height: 300px;
+    overflow-y: scroll;
+}
+.form-width {
+    width: 50%;
+}
+@media screen and (max-width: 767px){
+    .form-width {
+        width: 90%;
+    }
+}

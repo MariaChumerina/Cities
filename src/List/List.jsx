@@ -1,9 +1,9 @@
 import React from 'react';
 
-export function List({ city }) {
+export function List({ city, classes }) {
   return (
-        <div className='m-2'>
+        <li className={classes}>
           {city}
-        </div>
+        </li>
   );
 }

@@ -1,0 +1,17 @@
+.list-width {
+    width: 50%;
+}
+.mobile-btn {
+    display: none;
+}
+@media screen and (max-width: 767px){
+    .list-width {
+        width: 90%;
+    }
+    .mobile-hide {
+        display: none;
+    }
+    .mobile-btn {
+        display: block;
+    }
+}

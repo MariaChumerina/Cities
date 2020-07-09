@@ -32,6 +32,8 @@ export default class Form extends React.Component {
   }
 
   handleClick = (e) => {
+    console.log('click');
+
     const { textContent } = e.target;
     const { chosenCities } = this.state;
     this.setState({ chosenCities: uniq([textContent, ...chosenCities])});
@@ -60,10 +62,11 @@ export default class Form extends React.Component {
       return regExp.test(city);
     })
     .map((city, i) => (
-      <div className={cn({ card: true, 'card-selected': chosenCities.includes(city) })} key={`${city}_${i}`} onClick={this.handleClick}>
-         <List city={city} />
-      </div>
-        )
+      <List city={city}
+            classes={cn({ 'list-group-item': true, card: true, 'card-selected': chosenCities.includes(city), 'card-hover': true })}
+            key={`${city}_${i}`}
+            />
+      )
     )
   }
 
@@ -74,7 +77,7 @@ export default class Form extends React.Component {
     return (
         <>
           <form className='mt-5' onSubmit={this.handleSubmit}>
-            <div className="form-group w-50">
+            <div className="form-group form-width">
               <label htmlFor='chooseCity'>
                 Выберите город:
               </label>
@@ -85,7 +88,12 @@ export default class Form extends React.Component {
                   value={value}
                   onChange={this.handleChange}
                   placeholder="Введите название города" />
-              {value.length > 2 && this.getPossibleCities()}
+              {value.length > 2 &&
+              <div>
+                <div className='list-group overflow-scroll' onClick={this.handleClick}>
+                  {this.getPossibleCities()}
+                </div>
+              </div>}
             </div>
             <button type='submit' className="btn btn-secondary mt-1">Подтвердить</button>
           </form>
