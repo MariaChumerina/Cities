@@ -1,8 +1,8 @@
-.card-selected {
+.item-selected {
     background: gray;
     color: white;
 }
-.card-hover:hover  {
+.item-hover:hover  {
     background: gray;
     color: white;
     cursor: pointer;
@@ -13,6 +13,9 @@
 }
 .form-width {
     width: 30%;
+}
+.item-showing {
+    display: none;
 }
 @media screen and (max-width: 767px){
     .form-width {

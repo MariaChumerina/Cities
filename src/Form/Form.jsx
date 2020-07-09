@@ -59,16 +59,18 @@ export default class Form extends React.Component {
   }
 
   getPossibleCities() {
-    const { cities, value, selectedCities } = this.state;
+    const { cities, value, selectedCities, showingCities } = this.state;
     return cities.filter((city) => {
       const regExp = new RegExp(`^${value}`, 'i');
-      return regExp.test(city);
+      return regExp.test(city) && !showingCities.includes(city);
     })
     .map((city, i) => (
       <List city={city}
             classes={cn({ 'list-group-item': true,
-                          'card-selected': selectedCities.includes(city),
-                          'card-hover': true })}
+                          'item-selected': selectedCities.includes(city),
+                          'item-hover': true,
+                          'item-hidden': showingCities.includes(city),
+            })}
             key={`${city}_${i}`}
       />
       )
