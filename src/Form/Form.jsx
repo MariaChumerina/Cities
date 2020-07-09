@@ -18,7 +18,7 @@ export default class Form extends React.Component {
 
   componentDidMount() {
     const cities = russianCities.map(({ name }) => name);
-    const value =  localStorage.getItem('value')
+    const value = localStorage.getItem('value')
          ? localStorage.getItem('value') : '';
     const showingCities = localStorage.getItem('showingCities')
         ? localStorage.getItem('showingCities').split(',') : [];
@@ -33,10 +33,9 @@ export default class Form extends React.Component {
 
   handleClick = (e) => {
     const { textContent } = e.target;
-    const { selectedCities, showingCities } = this.state;
-    if (!showingCities.includes(textContent)) {
-      this.setState({ selectedCities: [textContent, ...selectedCities]});
-    } if (selectedCities.includes(textContent)) {
+    const { selectedCities } = this.state;
+    //Undo selection if item already selected
+    if (selectedCities.includes(textContent)) {
       const updated = selectedCities.filter((city) => city !== textContent);
       this.setState({ selectedCities: updated });
     }
@@ -58,7 +57,7 @@ export default class Form extends React.Component {
     localStorage.setItem('showingCities', updated.join(','));
   }
 
-  getPossibleCities() {
+  getCities() {
     const { cities, value, selectedCities, showingCities } = this.state;
     return cities.filter((city) => {
       const regExp = new RegExp(`^${value}`, 'i');
@@ -98,7 +97,7 @@ export default class Form extends React.Component {
               {value.length > 2 &&
               <div>
                 <div className='list-group overflow-scroll' onClick={this.handleClick}>
-                  {this.getPossibleCities()}
+                  {this.getCities()}
                 </div>
               </div>}
             </div>
