@@ -1,4 +1,4 @@
-# cities
+# Cities
 Filter-form for cities
 </br>
 <b>Copy project and run:</b>
