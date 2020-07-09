@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function List({ city, classes }) {
+export default function List({ city, classes }) {
   return (
         <li className={classes}>
           {city}

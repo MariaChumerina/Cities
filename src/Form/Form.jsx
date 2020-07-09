@@ -1,6 +1,6 @@
 import * as React from 'react';
 import russianCities from '../russian-cities.json';
-import { List } from '../List/List.jsx';
+import List from '../List/List.jsx';
 import ShowingCities from '../ShowingCities/ShowingCities.jsx';
 import './Form.css';
 import cn from 'classnames';
