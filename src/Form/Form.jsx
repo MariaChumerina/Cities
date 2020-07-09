@@ -34,6 +34,7 @@ export default class Form extends React.Component {
   handleClick = (e) => {
     const { textContent } = e.target;
     const { selectedCities } = this.state;
+    this.setState({ selectedCities: [textContent, ...selectedCities]});
     //Undo selection if item already selected
     if (selectedCities.includes(textContent)) {
       const updated = selectedCities.filter((city) => city !== textContent);
@@ -50,9 +51,9 @@ export default class Form extends React.Component {
     localStorage.setItem('showingCities', result.join(','));
   }
 
-  handleRemove = (key) => () => {
+  handleRemove = (removedCity) => () => {
     const { showingCities } = this.state;
-    const updated = showingCities.filter((city) => city !== key);
+    const updated = showingCities.filter((city) => city !== removedCity);
     this.setState({ showingCities: updated });
     localStorage.setItem('showingCities', updated.join(','));
   }
@@ -61,7 +62,7 @@ export default class Form extends React.Component {
     const { cities, value, selectedCities, showingCities } = this.state;
     return cities.filter((city) => {
       const regExp = new RegExp(`^${value}`, 'i');
-      return regExp.test(city) && !showingCities.includes(city);
+      return regExp.test(city);
     })
     .map((city, i) => (
       <List city={city}
@@ -106,7 +107,7 @@ export default class Form extends React.Component {
             </button>
           </form>
           {showingCities.length
-              ? <ShowingCities onRemove={(key) => this.handleRemove(key)} cities={showingCities}/> : []}
+              ? <ShowingCities onRemove={(city) => this.handleRemove(city)} cities={showingCities}/> : []}
         </div>
     );
   }

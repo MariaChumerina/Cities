@@ -14,7 +14,7 @@
 .form-width {
     width: 30%;
 }
-.item-showing {
+.item-hidden {
     display: none;
 }
 @media screen and (max-width: 767px){
