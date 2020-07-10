@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { sessionSaver } from '../SessionSaver.js';
 import DisplayingItems from '../DisplayingItems/DisplayingItems.jsx';
-import './Form.css';
+import './FormCities.css';
 import AutocompleteInput from '../AutocompleteInput/AutocompleteInput.jsx';
 import russianCities from '../russian-cities.json';
 
-export default class Form extends React.Component {
+export default class FormCities extends React.Component {
   state = {
     cities: [],
     selectedCities: [],

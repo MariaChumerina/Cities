@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import Form from './Form/Form.jsx';
+import FormCities from './FormCities/FormCities.jsx';
 
 function App() {
   return (
       <div className="container">
-        <Form/>
+        <FormCities/>
       </div>
   );
 }
