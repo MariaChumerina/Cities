@@ -4,11 +4,8 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 export default class AutocompleteInput extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: '',
-    }
+  state = {
+    value: '',
   }
 
   componentDidMount() {
