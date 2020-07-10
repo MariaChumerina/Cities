@@ -8,7 +8,7 @@ class SessionSaver {
   }
   getDisplayingCities() {
     const serializedCities = localStorage.getItem(SessionSaver.DISPLAYING_CITIES_KEY );
-    return serializedCities && serializedCities.split(SessionSaver.SEPARATOR) || [];
+    return serializedCities ? serializedCities.split(SessionSaver.SEPARATOR) : [];
   }
   getUserLastTypedValue() {
     return localStorage.getItem(SessionSaver.USER_TYPED_VALUE_KEY) || '';

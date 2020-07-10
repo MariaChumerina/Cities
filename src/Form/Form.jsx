@@ -99,8 +99,7 @@ export default class Form extends React.Component {
               Подтвердить
             </button>
           </form>
-          {displayingCities.length
-              ? <DisplayingCities onRemove={this.handleRemove} cities={displayingCities}/> : []}
+            <DisplayingCities onRemove={this.handleRemove} cities={displayingCities}/>
         </div>
     );
   }
