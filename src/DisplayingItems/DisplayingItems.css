@@ -4,6 +4,9 @@
 .list-position {
     margin: 0 auto;
 }
+.grey-color {
+    color: gray;
+}
 @media screen and (max-width: 767px){
     .list-width {
         width: 90%;

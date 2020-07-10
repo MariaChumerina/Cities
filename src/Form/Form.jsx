@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { sessionSaver } from '../SessionSaver.js';
-import DisplayingCities from '../DisplayingCities/DisplayingCities.jsx';
+import DisplayingItems from '../DisplayingItems/DisplayingItems.jsx';
 import './Form.css';
 import AutocompleteInput from '../AutocompleteInput/AutocompleteInput.jsx';
 import russianCities from '../russian-cities.json';
@@ -49,7 +49,7 @@ export default class Form extends React.Component {
         <div className='d-flex mobile-direction mt-5'>
           <form className='form-width mr-md-5' onSubmit={this.handleSubmit}>
             <div className="form-group">
-              <label htmlFor='chooseCity'>
+              <label htmlFor='chooseItem'>
                 Выберите город:
               </label>
               <AutocompleteInput
@@ -63,7 +63,12 @@ export default class Form extends React.Component {
               Подтвердить
             </button>
           </form>
-            <DisplayingCities onRemove={this.handleRemove} cities={displayingCities}/>
+          <div className='list-width list-position'>
+            <div className='mt-5 mt-md-0 mb-0'>
+              Выбранные города:
+            </div>
+            <DisplayingItems onRemove={this.handleRemove} items={displayingCities}/>
+          </div>
         </div>
     );
   }

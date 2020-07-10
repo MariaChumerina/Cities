@@ -28,15 +28,15 @@ export default class AutocompleteInput extends React.Component {
     const { value } = this.state;
     return items.filter((item) => {
       const regExp = new RegExp(`^${value}`, 'i');
-      return regExp.test(item);
+      return regExp.test(item) && !displayingItems.includes(item);
     })
     .map((item, i) => (
             <li key={`${item}_${i}`}
                 className={classNames({ 'list-group-item': true,
                   'item-selected': selectedItems.includes(item),
                   'item-hover': true,
-                  'item-hidden': displayingItems.includes(item),
-                })}>
+                })}
+            >
               {item}
             </li>
         )
@@ -52,10 +52,10 @@ export default class AutocompleteInput extends React.Component {
           <input
               className="form-control"
               list="json-datalist"
-              id='chooseCity'
+              id='chooseItem'
               value={value}
               onChange={this.handleChange}
-              placeholder="Введите название города" />
+              placeholder="Введите название" />
           {value.length > 2 &&
           <div>
             <ul className='list-group overflow-scroll' onClick={onSelect}>
