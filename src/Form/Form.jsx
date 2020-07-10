@@ -3,6 +3,7 @@ import russianCities from '../russian-cities.json';
 import ShowingCities from '../ShowingCities/ShowingCities.jsx';
 import './Form.css';
 import classNames from 'classnames';
+import { sessionSaver } from '../SessionSaver.js';
 
 export default class Form extends React.Component {
     state = {
@@ -14,17 +15,17 @@ export default class Form extends React.Component {
 
   componentDidMount() {
     const cities = russianCities.map(({ name }) => name);
-    const value = localStorage.getItem('value')
-         ? localStorage.getItem('value') : '';
-    const showingCities = localStorage.getItem('showingCities')
-        ? localStorage.getItem('showingCities').split(',') : [];
-    this.setState({ cities, value, showingCities });
+    this.setState({
+      cities,
+      value: sessionSaver.getUserLastTypedValue(),
+      showingCities: sessionSaver.getDisplayingCities(),
+    });
   }
 
   handleChange = (e) => {
     const { value } = e.target;
     this.setState({ value });
-    localStorage.setItem('value', value);
+    sessionSaver.setUserTypedValue(value);
   }
 
   handleClick = (e) => {
@@ -39,15 +40,15 @@ export default class Form extends React.Component {
     const { selectedCities, showingCities } = this.state;
     const result = [...selectedCities, ...showingCities];
     this.setState({ showingCities: result, selectedCities: [], value: '', });
-    localStorage.setItem('value', '');
-    localStorage.setItem('showingCities', result.join(','));
+    sessionSaver.setUserTypedValue('');
+    sessionSaver.setDisplayingCities(result);
   }
 
   handleRemove = (removedCity) => () => {
     const { showingCities } = this.state;
     const updated = showingCities.filter((city) => city !== removedCity);
     this.setState({ showingCities: updated });
-    localStorage.setItem('showingCities', updated.join(','));
+    sessionSaver.setDisplayingCities(updated);
   }
 
   renderCitiesList() {
