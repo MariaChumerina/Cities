@@ -1,7 +1,7 @@
 import * as React from 'react';
 import russianCities from '../russian-cities.json';
 import { sessionSaver } from '../SessionSaver.js';
-import ShowingCities from '../ShowingCities/ShowingCities.jsx';
+import DisplayingCities from '../DisplayingCities/DisplayingCities.jsx';
 import './Form.css';
 import classNames from 'classnames';
 
@@ -10,7 +10,7 @@ export default class Form extends React.Component {
       value: '',
       cities: [],
       selectedCities: [],
-      showingCities: [],
+      displayingCities: [],
     };
 
   componentDidMount() {
@@ -18,7 +18,7 @@ export default class Form extends React.Component {
     this.setState({
       cities,
       value: sessionSaver.getUserLastTypedValue(),
-      showingCities: sessionSaver.getDisplayingCities(),
+      displayingCities: sessionSaver.getDisplayingCities(),
     });
   }
 
@@ -37,22 +37,22 @@ export default class Form extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { selectedCities, showingCities } = this.state;
-    const result = [...selectedCities, ...showingCities];
-    this.setState({ showingCities: result, selectedCities: [], value: '', });
+    const { selectedCities, displayingCities } = this.state;
+    const result = [...selectedCities, ...displayingCities];
+    this.setState({ displayingCities: result, selectedCities: [], value: '', });
     sessionSaver.setUserTypedValue('');
     sessionSaver.setDisplayingCities(result);
   }
 
-  handleRemove = (removedCity) => () => {
-    const { showingCities } = this.state;
-    const updated = showingCities.filter((city) => city !== removedCity);
-    this.setState({ showingCities: updated });
+  handleRemove = (removedCity) => {
+    const { displayingCities } = this.state;
+    const updated = displayingCities.filter((city) => city !== removedCity);
+    this.setState({ displayingCities: updated });
     sessionSaver.setDisplayingCities(updated);
   }
 
   renderCitiesList() {
-    const { cities, value, selectedCities, showingCities } = this.state;
+    const { cities, value, selectedCities, displayingCities } = this.state;
     return cities.filter((city) => {
       const regExp = new RegExp(`^${value}`, 'i');
       return regExp.test(city);
@@ -62,7 +62,7 @@ export default class Form extends React.Component {
           className={classNames({ 'list-group-item': true,
         'item-selected': selectedCities.includes(city),
         'item-hover': true,
-        'item-hidden': showingCities.includes(city),
+        'item-hidden': displayingCities.includes(city),
       })}>
         {city}
       </li>
@@ -72,7 +72,7 @@ export default class Form extends React.Component {
 
 
   render() {
-    const { value, showingCities } = this.state;
+    const { value, displayingCities } = this.state;
 
     return (
         <div className='d-flex mobile-direction mt-5'>
@@ -99,8 +99,8 @@ export default class Form extends React.Component {
               Подтвердить
             </button>
           </form>
-          {showingCities.length
-              ? <ShowingCities onRemove={(city) => this.handleRemove(city)} cities={showingCities}/> : []}
+          {displayingCities.length
+              ? <DisplayingCities onRemove={this.handleRemove} cities={displayingCities}/> : []}
         </div>
     );
   }

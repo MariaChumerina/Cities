@@ -1,6 +1,6 @@
 class SessionSaver {
   static USER_TYPED_VALUE_KEY = 'value';
-  static DISPLAYING_CITIES_KEY = 'showingCities';
+  static DISPLAYING_CITIES_KEY = 'displayingCities';
   static SEPARATOR = ',';
 
   setDisplayingCities(cities) {
