@@ -1,5 +1,6 @@
 import React from 'react';
 import './DisplayingCities.css';
+import PropTypes from 'prop-types';
 
 function DisplayingCityItem({ city, onRemove }) {
   const handleClickRemove = React.useCallback(() => onRemove(city), [onRemove, city]);
@@ -24,6 +25,11 @@ export default function DisplayingCities({ cities, onRemove }) {
             <ul className='list-group mt-2 mb-5'>
               {cities.map((city) => <DisplayingCityItem key={city} city={city} onRemove={onRemove}/>)}
             </ul>
-          </div> : []
+          </div> : null
     );
+}
+
+DisplayingCities.propTypes = {
+  cities: PropTypes.arrayOf(PropTypes.string),
+  onRemove: PropTypes.func,
 }
