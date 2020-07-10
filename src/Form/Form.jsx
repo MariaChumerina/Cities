@@ -1,9 +1,9 @@
 import * as React from 'react';
 import russianCities from '../russian-cities.json';
+import { sessionSaver } from '../SessionSaver.js';
 import ShowingCities from '../ShowingCities/ShowingCities.jsx';
 import './Form.css';
 import classNames from 'classnames';
-import { sessionSaver } from '../SessionSaver.js';
 
 export default class Form extends React.Component {
     state = {

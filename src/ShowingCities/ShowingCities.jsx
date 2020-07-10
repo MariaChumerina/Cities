@@ -11,11 +11,8 @@ export default function ShowingCities({ cities, onRemove }) {
               {cities.map((city) => (
                 <li className='list-group-item d-flex justify-content-between align-items-baseline' key={city}>
                   {city}
-                  <button type='button' className='btn btn-link mobile-hide' onClick={onRemove(city)}>
-                    Удалить
-                  </button>
-                  <button type='button' className='btn btn-link mobile-btn' onClick={onRemove(city)}>
-                    X
+                  <button type='button' className='btn btn-link' onClick={onRemove(city)}>
+                    &#10005;
                   </button>
                 </li>
                   )

@@ -1,21 +1,12 @@
 .list-width {
     width: 40%;
 }
-.mobile-btn {
-    display: none;
-}
 .list-position {
     margin: 0 auto;
 }
 @media screen and (max-width: 767px){
     .list-width {
         width: 90%;
-    }
-    .mobile-hide {
-        display: none;
-    }
-    .mobile-btn {
-        display: block;
     }
     .list-position {
         margin: 0;
