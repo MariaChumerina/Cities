@@ -1,5 +1,5 @@
 import React from 'react';
-import './Showing-cities.css'
+import './ShowingCities.css'
 
 export default function ShowingCities({ cities, onRemove }) {
     return (

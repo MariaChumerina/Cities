@@ -1,20 +1,16 @@
 import * as React from 'react';
 import russianCities from '../russian-cities.json';
-import List from '../List/List.jsx';
 import ShowingCities from '../ShowingCities/ShowingCities.jsx';
 import './Form.css';
-import cn from 'classnames';
+import classNames from 'classnames';
 
 export default class Form extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+    state = {
       value: '',
       cities: [],
       selectedCities: [],
       showingCities: [],
     };
-  }
 
   componentDidMount() {
     const cities = russianCities.map(({ name }) => name);
@@ -34,12 +30,8 @@ export default class Form extends React.Component {
   handleClick = (e) => {
     const { textContent } = e.target;
     const { selectedCities } = this.state;
-    this.setState({ selectedCities: [textContent, ...selectedCities]});
-    //Undo selection if item already selected
-    if (selectedCities.includes(textContent)) {
-      const updated = selectedCities.filter((city) => city !== textContent);
-      this.setState({ selectedCities: updated });
-    }
+    this.setState({ selectedCities: selectedCities.includes(textContent)
+          ? selectedCities.filter((city) => city !== textContent) : [textContent, ...selectedCities] });
   }
 
   handleSubmit = (e) => {
@@ -58,21 +50,21 @@ export default class Form extends React.Component {
     localStorage.setItem('showingCities', updated.join(','));
   }
 
-  getCities() {
+  renderCitiesList() {
     const { cities, value, selectedCities, showingCities } = this.state;
     return cities.filter((city) => {
       const regExp = new RegExp(`^${value}`, 'i');
       return regExp.test(city);
     })
     .map((city, i) => (
-      <List city={city}
-            classes={cn({ 'list-group-item': true,
-                          'item-selected': selectedCities.includes(city),
-                          'item-hover': true,
-                          'item-hidden': showingCities.includes(city),
-            })}
-            key={`${city}_${i}`}
-      />
+      <li key={`${city}_${i}`}
+          className={classNames({ 'list-group-item': true,
+        'item-selected': selectedCities.includes(city),
+        'item-hover': true,
+        'item-hidden': showingCities.includes(city),
+      })}>
+        {city}
+      </li>
       )
     );
   }
@@ -97,9 +89,9 @@ export default class Form extends React.Component {
                   placeholder="Введите название города" />
               {value.length > 2 &&
               <div>
-                <div className='list-group overflow-scroll' onClick={this.handleClick}>
-                  {this.getCities()}
-                </div>
+                <ul className='list-group overflow-scroll' onClick={this.handleClick}>
+                  {this.renderCitiesList()}
+                </ul>
               </div>}
             </div>
             <button type='submit' className="btn btn-secondary mt-1">
