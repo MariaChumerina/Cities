@@ -25,12 +25,13 @@ export default class AutocompleteInput extends React.Component {
     const { items, selectedItems, displayingItems } = this.props;
     const { value } = this.state;
     return items.filter((item) => {
-      const regExp = new RegExp(`^${value}`, 'i');
-      return regExp.test(item) && !displayingItems.includes(item);
+      const isItemMatchValue = item.toLowerCase().startsWith(value.toLowerCase());
+      return isItemMatchValue && !displayingItems.includes(item);
     })
     .map((item, i) => (
             <li key={`${item}_${i}`}
-                className={classNames({ 'list-group-item': true,
+                className={classNames({
+                  'list-group-item': true,
                   'item-selected': selectedItems.includes(item),
                   'item-hover': true,
                 })}
