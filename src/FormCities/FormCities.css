@@ -22,13 +22,14 @@ label {
     border-radius: 4px;
 }
 .btn {
+    font-size: 14px;
     color: #494949;
     text-transform: uppercase;
     text-decoration: none;
     background: #ffffff;
     padding: 10px;
     border: 2px solid gray;
-    border-radius: 2px;
+    border-radius: 4px;
     display: inline-block;
     transition: all 0.4s ease 0s;
 }
