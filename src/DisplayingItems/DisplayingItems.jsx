@@ -6,13 +6,11 @@ function DisplayingItem({ item, onRemove }) {
   const handleClickRemove = React.useCallback(() => onRemove(item), [onRemove, item]);
 
   return (
-      <li className='list-group-item display-flex' key={item}>
+      <li className='list-group-item' key={item}>
         {item}
-        <div className='btn-link-block'>
-          <button type='button' className='btn-link' onClick={handleClickRemove}>
-            &#10005;
-          </button>
-        </div>
+        <button type='button' className='btn-link' onClick={handleClickRemove}>
+          &#10005;
+        </button>
       </li>
   );
 }
