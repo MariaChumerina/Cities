@@ -4,9 +4,9 @@ import FormCities from './FormCities/FormCities.jsx';
 
 function App() {
   return (
-      <div className="container">
-        <FormCities/>
-      </div>
+    <div className="container">
+      <FormCities />
+    </div>
   );
 }
 

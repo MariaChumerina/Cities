@@ -1,0 +1,30 @@
+env:
+  browser: true
+  es2020: true
+extends:
+  - 'eslint:recommended'
+  - 'plugin:react/recommended'
+  - 'airbnb'
+  - 'airbnb/hooks'
+settings:
+  react:
+    version: detect
+parserOptions:
+  ecmaFeatures:
+    jsx: true
+  ecmaVersion: 11
+  sourceType: module
+parser: babel-eslint
+plugins:
+  - react
+rules:
+  import/extensions: 'off'
+  import/no-named-as-default: 'off'
+  import/no-named-as-default-member: 'off'
+  react/state-in-constructor: 'off'
+  react/jsx-filename-extension:
+    - 1
+    - extensions:
+      - ".js"
+      - ".jsx"
+  jsx-a11y/label-has-associated-control: 'off'

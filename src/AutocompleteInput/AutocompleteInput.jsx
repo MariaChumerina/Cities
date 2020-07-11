@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { sessionSaver } from '../SessionSaver.js';
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import { sessionSaver } from '../SessionSaver.js';
 import './AutocompleteInput.css';
 
 export default class AutocompleteInput extends React.Component {
@@ -22,53 +22,60 @@ export default class AutocompleteInput extends React.Component {
   }
 
   renderItemsList() {
-    const { items, selectedItems, displayingItems } = this.props;
+    const {
+      items, selectedItems, displayingItems, onSelect,
+    } = this.props;
     const { value } = this.state;
     return items.filter((item) => {
       const isItemMatchValue = item.toLowerCase().startsWith(value.toLowerCase());
       return isItemMatchValue && !displayingItems.includes(item);
     })
-    .map((item, i) => (
-            <li key={`${item}_${i}`}
-                className={classNames({
-                  'list-group-item': true,
-                  'item-selected': selectedItems.includes(item),
-                  'item-hover': true,
-                })}
-            >
-              {item}
-            </li>
-        )
-    );
+      .map((item) => (
+        <li
+          key={`${item}`}
+          className={classNames({
+            'list-group-item': true,
+            'item-selected': selectedItems.includes(item),
+            'item-hover': true,
+          })}
+        >
+          <option onClick={onSelect}>
+            {item}
+          </option>
+        </li>
+      ));
   }
 
   render() {
     const { value } = this.state;
-    const { onSelect } = this.props;
+    const { id } = this.props;
 
     return (
-        <>
-          <input
-              className="form-field"
-              list="json-datalist"
-              id='chooseItem'
-              value={value}
-              onChange={this.handleChange}
-              placeholder="Введите название" />
-          {value.length > 2 &&
-          <div>
-            <ul className='list-group list-group-autocomplete overflow-scroll' onClick={onSelect}>
-              {this.renderItemsList()}
-            </ul>
-          </div>}
-        </>
+      <>
+        <input
+          className="form-field"
+          list="json-datalist"
+          id={id}
+          value={value}
+          onChange={this.handleChange}
+          placeholder="Введите название"
+        />
+        {value.length > 2 && (
+        <div>
+          <ul className="list-group list-group-autocomplete overflow-scroll">
+            {this.renderItemsList()}
+          </ul>
+        </div>
+        )}
+      </>
     );
   }
 }
 
 AutocompleteInput.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.string),
-  onSelect: PropTypes.func,
-  selectedItems: PropTypes.arrayOf(PropTypes.string),
-  displayingItems: PropTypes.arrayOf(PropTypes.string),
-}
+  items: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onSelect: PropTypes.func.isRequired,
+  selectedItems: PropTypes.arrayOf(PropTypes.string).isRequired,
+  displayingItems: PropTypes.arrayOf(PropTypes.string).isRequired,
+  id: PropTypes.string.isRequired,
+};
