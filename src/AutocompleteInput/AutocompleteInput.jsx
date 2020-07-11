@@ -2,6 +2,7 @@ import * as React from 'react';
 import { sessionSaver } from '../SessionSaver.js';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import './AutocompleteInput.css';
 
 export default class AutocompleteInput extends React.Component {
   state = {
@@ -47,7 +48,7 @@ export default class AutocompleteInput extends React.Component {
     return (
         <>
           <input
-              className="form-control"
+              className="form-field"
               list="json-datalist"
               id='chooseItem'
               value={value}
@@ -55,7 +56,7 @@ export default class AutocompleteInput extends React.Component {
               placeholder="Введите название" />
           {value.length > 2 &&
           <div>
-            <ul className='list-group overflow-scroll' onClick={onSelect}>
+            <ul className='list-group  list-group-autocomplete overflow-scroll' onClick={onSelect}>
               {this.renderItemsList()}
             </ul>
           </div>}

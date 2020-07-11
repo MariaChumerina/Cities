@@ -1,0 +1,27 @@
+.form-field {
+    width: 20vw;
+    height: 36px;
+    padding: 0 14px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    outline: 0;
+    transition: .2s;
+    margin-top: 16px;
+}
+.form-field:focus {
+    border-color: #0f7ef1;
+}
+.list-group-autocomplete {
+    width: 22vw;
+    min-width: fit-content;
+    margin-top: 0;
+}
+@media screen and (max-width: 767px) {
+    .list-group-autocomplete {
+        margin-top: 0;
+        width: 100%;
+    }
+    .form-field {
+        width: 90%;
+    }
+}

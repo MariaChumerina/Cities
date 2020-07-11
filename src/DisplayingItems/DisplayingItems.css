@@ -1,17 +1,32 @@
-.list-width {
-    width: 40%;
+.list-group-displaying {
+    position: relative;
+    width: 30vw;
 }
-.list-position {
-    margin: 0 auto;
+.list-group-item {
+    list-style-type: none;
+    padding-left: 14px;
+}
+.btn-link {
+    color: #0f7ef1;
+    border: none;
+    background-color: white;
+    font-size: 20px;
+}
+.btn-link:hover {
+    color: darkblue;
+}
+.btn-link-block {
+    position: absolute;
+    right: 10px;
+}
+.btn-link:hover {
+    cursor: pointer;
 }
 .grey-color {
     color: gray;
 }
-@media screen and (max-width: 767px){
-    .list-width {
+@media screen and (max-width: 767px) {
+    .list-group-displaying {
         width: 90%;
-    }
-    .list-position {
-        margin: 0;
     }
 }

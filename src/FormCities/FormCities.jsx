@@ -46,9 +46,9 @@ export default class FormCities extends React.Component {
     const { cities, selectedCities, displayingCities } = this.state;
 
     return (
-        <div className='d-flex mobile-direction mt-5'>
-          <form className='form-width mr-md-5' onSubmit={this.handleSubmit}>
-            <div className="form-group">
+        <div className='display-flex mobile-direction margin-top'>
+          <form className='form-position mobile-direction form-width display-flex' onSubmit={this.handleSubmit}>
+            <div className='form-input'>
               <label htmlFor='chooseItem'>
                 Выберите город:
               </label>
@@ -59,12 +59,14 @@ export default class FormCities extends React.Component {
                   displayingItems={displayingCities}
               />
             </div>
-            <button type='submit' className="btn btn-secondary mt-1">
-              Подтвердить
-            </button>
+            <div className='btn-block-position btn-block-width'>
+              <button type='submit' className="btn">
+                Подтвердить
+              </button>
+            </div>
           </form>
-          <div className='list-width list-position'>
-            <div className='mt-5 mt-md-0 mb-0'>
+          <div className='margin-top-mobile'>
+            <div>
               Выбранные города:
             </div>
             <DisplayingItems onRemove={this.handleRemove} items={displayingCities}/>
