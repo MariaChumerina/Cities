@@ -57,7 +57,7 @@ export default class AutocompleteInput extends React.Component {
               placeholder="Введите название" />
           {value.length > 2 &&
           <div>
-            <ul className='list-group  list-group-autocomplete overflow-scroll' onClick={onSelect}>
+            <ul className='list-group list-group-autocomplete overflow-scroll' onClick={onSelect}>
               {this.renderItemsList()}
             </ul>
           </div>}
